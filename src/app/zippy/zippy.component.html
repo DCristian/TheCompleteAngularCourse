@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-header">
+    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseBody" aria-expanded="true" aria-controls="collapseBody" (click)="toggle()">
+      {{ title }}
+    </button>
+  </div>
+
+  <div id="collapseBody" class="card-body collapse" aria-labelledby="heading" [class.show]="displayContent">
+      <ng-content></ng-content>
+  </div>
+</div>
