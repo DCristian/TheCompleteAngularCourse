@@ -1,0 +1,64 @@
+<form #f="ngForm" (ngSubmit)="submit(f)">
+  <div class="form-group">
+    <div ngModelGroup="contact">
+      <label for="firstName">First name</label>
+      <input id="firstName" type="text" class="form-control" name="firstName"
+             ngModel #firstName="ngModel" required minlength="3"
+      />
+      <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+        <div *ngIf="firstName?.errors.required">
+          First name is required
+        </div>
+        <div *ngIf="firstName?.errors.minlength">
+          First name should be minimum 3 characters
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="comment">Comment</label>
+    <textarea id="comment" cols="30" rows="10" class="form-control" name="comment"
+              ngModel
+    >
+    </textarea>
+  </div>
+
+  <div class="form-group checkbox">
+    <label>
+      <input type="checkbox" name="isSubscribed"
+             ngModel
+      >
+      Subscribe to mailing list
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label for="contactMethod"></label>
+    <select id="contactMethod" class="form-control" name="contactMethod"
+            ngModel
+    >
+      <option value=""></option>
+      <option *ngFor="let method of contactMethods" [value]="method.id">
+        {{ method.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <div class="radio" *ngFor="let method of contactMethods">
+       <label for="contactMethod">
+          <input type="radio" name="contactMethod" [value]="method.id"
+                 ngModel
+          >
+         {{ method.name }}
+       </label>
+    </div>
+  </div>
+
+  <p>
+    {{ f.value| json }}
+  </p>
+
+  <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
+</form>
