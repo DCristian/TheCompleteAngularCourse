@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses.component';
@@ -18,6 +19,11 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { NewCourseFormComponent } from './new-course-form.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { PostsComponent } from './posts/posts.component';
+import { PostService } from './services/post.service';
+import { AppErrorHandler } from './common/app-error-handler';
+import { FollowersComponent } from './followers/followers.component';
+import {FollowersService} from './services/followers.service';
 
 @NgModule({
   declarations: [
@@ -35,15 +41,24 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ContactFormComponent,
     SignupFormComponent,
     NewCourseFormComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    PostsComponent,
+    FollowersComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
-    CoursesService
+    CoursesService,
+    PostService,
+    FollowersService,
+    {
+      provide: ErrorHandler,
+      useClass: AppErrorHandler
+    }
   ],
   bootstrap: [AppComponent]
 })
