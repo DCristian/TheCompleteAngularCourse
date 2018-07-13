@@ -23,7 +23,13 @@ import { PostsComponent } from './posts/posts.component';
 import { PostService } from './services/post.service';
 import { AppErrorHandler } from './common/app-error-handler';
 import { FollowersComponent } from './followers/followers.component';
-import {FollowersService} from './services/followers.service';
+import { FollowersService } from './services/followers.service';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { GithubProfileComponent } from './github-profile/github-profile.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { RouterModule } from '@angular/router';
+import { ArchiveComponent } from './archive/archive.component';
 
 @NgModule({
   declarations: [
@@ -43,13 +49,44 @@ import {FollowersService} from './services/followers.service';
     NewCourseFormComponent,
     ChangePasswordComponent,
     PostsComponent,
-    FollowersComponent
+    FollowersComponent,
+    NavbarComponent,
+    HomeComponent,
+    GithubProfileComponent,
+    NotFoundComponent,
+    ArchiveComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: HomeComponent
+      },
+      {
+        path: 'followers/:id/:username',
+        component: GithubProfileComponent
+      },
+      {
+        path: 'followers',
+        component: FollowersComponent
+      },
+      {
+        path: 'posts',
+        component: PostsComponent
+      },
+      {
+        path: 'archive/:year/:month',
+        component: ArchiveComponent
+      },
+      {
+        path: '**',
+        component: NotFoundComponent
+      },
+    ])
   ],
   providers: [
     CoursesService,
